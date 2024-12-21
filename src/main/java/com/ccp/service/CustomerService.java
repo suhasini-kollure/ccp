@@ -17,4 +17,6 @@ public interface CustomerService extends UserDetailsService {
     Customer updateCustomer(String customerId, UpdateCustomer updateCustomer);
 
     String deleteCustomer(String customerId);
+
+    Customer getCustomerByCardNumber(String cardNumber);
 }

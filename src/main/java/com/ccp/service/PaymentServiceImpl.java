@@ -3,8 +3,10 @@ package com.ccp.service;
 import com.ccp.model.Card;
 import com.ccp.model.Payment;
 import com.ccp.repository.PaymentRepository;
+import jakarta.ws.rs.NotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +64,49 @@ public class PaymentServiceImpl implements PaymentService {
     public boolean isCardExpired(String cardNumber) {
         Card card = cardService.getCard(cardNumber);
         return card.getExpirationDate().isBefore(LocalDate.now());
+    }
+
+    @Override
+    public Payment getTransaction(String transactionId) {
+        Optional<Payment> payment = paymentRepository.findById(transactionId);
+        if (payment.isPresent()) {
+            log.info("Transaction found with transactionId : {}", transactionId);
+            return payment.get();
+        } else {
+            log.error("Transaction not found with transactionId : {}", transactionId);
+            throw new NotFoundException(String.format("Transaction not found with transactionId : %s", transactionId));
+        }
+    }
+
+    @Override
+    public List<Payment> getAllTransactionOfCard(String cardNumber) {
+        List<Optional<Payment>> optionalPayments = paymentRepository.findByCardCardNumber(cardNumber);
+        if (optionalPayments.isEmpty()) {
+            log.error("Transactions not found with cardNumber : {}", cardNumber);
+            throw new NotFoundException(String.format("Transactions not found with cardNumber : %s", cardNumber));
+        } else {
+            List<Payment> payments = optionalPayments.stream()
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .toList();
+            log.info("Transactions found for cardNumber : {}", cardNumber);
+            return payments;
+        }
+    }
+
+    @Override
+    public List<Payment> getAllTransactionsOfCustomer(String customerId) {
+        List<Optional<Payment>> optionalPayments = paymentRepository.findByCustomerCustomerId(customerId);
+        if (optionalPayments.isEmpty()) {
+            log.error("Transactions not found with customerId : {}", customerId);
+            throw new NotFoundException(String.format("Transactions not found with customerId : %s", customerId));
+        } else {
+            List<Payment> payments = optionalPayments.stream()
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .toList();
+            log.info("Transactions found for customerId : {}", customerId);
+            return payments;
+        }
     }
 }

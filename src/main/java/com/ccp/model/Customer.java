@@ -1,5 +1,6 @@
 package com.ccp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -55,6 +56,11 @@ public class Customer {
     @JsonManagedReference
     @ToString.Exclude
     private List<Card> cards;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Payment> payments;
 
     @Override
     public final boolean equals(Object o) {

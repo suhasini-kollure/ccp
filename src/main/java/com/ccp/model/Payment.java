@@ -1,11 +1,11 @@
 package com.ccp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -22,15 +22,22 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID transactionId;
+    private String transactionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_number", referencedColumnName = "card_number", nullable = false)
+    @JsonIgnore
     @ToString.Exclude
     private Card card;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
+    @JsonIgnore
+    @ToString.Exclude
+    private Customer customer;
+
     @NotEmpty(message = "Payment amount is required.")
-    @Pattern(regexp = "\\d{1,5}", message = "Payment amount must be up to 5 digits")
+    @Pattern(regexp = "[1-9]\\d{0,4}", message = "Payment amount must be at least 1 and less than 5 digits")
     private String paymentAmount;
 
     @Pattern(regexp = "Open|Closed|Failure", message = "Status must be either Open, Closed, or Failure")
