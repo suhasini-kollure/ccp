@@ -3,18 +3,17 @@ package com.ccp.service;
 import com.ccp.model.Card;
 import com.ccp.model.Payment;
 import com.ccp.repository.PaymentRepository;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Optional;
-
 @Service
 @Slf4j
-public class PaymentServiceImpl implements PaymentService{
+public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final CardService cardService;
@@ -32,8 +31,13 @@ public class PaymentServiceImpl implements PaymentService{
             if (!isCardExpired(payment.getCard().getCardNumber())) {
                 if ("Open".equals(payment.getStatus())) {
                     log.info("Checking for existing Open transaction.");
-                    Optional<Payment> existingOpenPayment = paymentRepository.findByCardAndStatus(payment.getCard(), "Open");
-                    if (existingOpenPayment.isPresent() && existingOpenPayment.get().getTimestamp().isAfter(LocalDateTime.now().minusMinutes(10))) {
+                    Optional<Payment> existingOpenPayment =
+                            paymentRepository.findByCardAndStatus(payment.getCard(), "Open");
+                    if (existingOpenPayment.isPresent()
+                            && existingOpenPayment
+                                    .get()
+                                    .getTimestamp()
+                                    .isAfter(LocalDateTime.now().minusMinutes(10))) {
                         log.error("Transaction failed, One existing transaction is Open.");
                         payment.setStatus("Failure");
                         payment.setTimestamp(LocalDateTime.now());

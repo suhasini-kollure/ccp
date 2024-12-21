@@ -26,7 +26,8 @@ public class PaymentController {
     }
 
     @PostMapping("/process/{cardNumber}")
-    public ResponseEntity<Payment> processPayment(@Valid @RequestBody Payment payment, @PathVariable("cardNumber") String cardNumber) {
+    public ResponseEntity<Payment> processPayment(
+            @Valid @RequestBody Payment payment, @PathVariable("cardNumber") String cardNumber) {
 
         Card card = cardService.getCard(cardNumber);
         payment.setCard(card);
@@ -37,5 +38,4 @@ public class PaymentController {
         Payment processedPayment = paymentService.processPayment(payment);
         return new ResponseEntity<>(processedPayment, HttpStatus.OK);
     }
-
 }

@@ -16,8 +16,6 @@ public class SwaggerConfig {
                         .title("Cards and Payment API")
                         .description("Spring boot project for cards and payment system")
                         .version("0.0.1-SNAPSHOT")
-                        .contact(new Contact()
-                                .name("Suhasini Kollure")
-                                .email("kolluresuhasinik@gmail.com")));
+                        .contact(new Contact().name("Suhasini Kollure").email("kolluresuhasinik@gmail.com")));
     }
 }

@@ -4,6 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.6'
 	id 'jacoco'
 	id 'org.sonarqube' version '5.1.0.4882'
+	id 'com.diffplug.spotless' version '6.25.0'
 }
 
 group = 'com.ccp'
@@ -45,6 +46,14 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+spotless {
+	java {
+		formatAnnotations()
+		removeUnusedImports()
+		palantirJavaFormat()
+	}
+}
+
 jacoco {
 	toolVersion = "0.8.12"
 }
@@ -75,8 +84,8 @@ sonar {
 		property "sonar.host.url", "http://localhost:9000"
 		property "sonar.token", System.getenv("SONAR_TOKEN")
 		property "sonar.organization", "ccp"
-		property "sonar.scm.disabled", "true"
-//		property "sonar.scm.provider", "git"
+//		property "sonar.scm.disabled", "true"
+		property "sonar.scm.provider", "git"
 		property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
 	}
 }

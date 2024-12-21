@@ -12,6 +12,4 @@ public interface CardService {
     Card updateCard(String cardNumber, UpdateCard updateCard);
 
     String deleteCard(String cardNumber);
-
 }
-

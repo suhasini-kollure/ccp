@@ -7,5 +7,4 @@ public interface PaymentService {
     Payment processPayment(Payment payment);
 
     boolean isCardExpired(String cardNumber);
-
 }

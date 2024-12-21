@@ -5,12 +5,11 @@ import com.ccp.model.Card;
 import com.ccp.model.Customer;
 import com.ccp.repository.CardRepository;
 import jakarta.ws.rs.NotFoundException;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Slf4j
 @Service

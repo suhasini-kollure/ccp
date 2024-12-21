@@ -26,7 +26,11 @@ public class SecurityConfig {
     private final SecurityFilter securityFilter;
 
     @Autowired
-    public SecurityConfig(CustomerService customerService, PasswordEncoder passwordEncoder, InvalidUserAuthenticationEntryPoint authenticationEntryPoint, SecurityFilter securityFilter) {
+    public SecurityConfig(
+            CustomerService customerService,
+            PasswordEncoder passwordEncoder,
+            InvalidUserAuthenticationEntryPoint authenticationEntryPoint,
+            SecurityFilter securityFilter) {
         this.customerService = customerService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationEntryPoint = authenticationEntryPoint;
@@ -47,7 +51,8 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-                .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(authenticationEntryPoint))
+                .exceptionHandling(
+                        exceptionHandling -> exceptionHandling.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(
                         sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
@@ -56,9 +61,9 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(customerService).passwordEncoder(passwordEncoder);
         return authenticationManagerBuilder.build();
     }
-
 }

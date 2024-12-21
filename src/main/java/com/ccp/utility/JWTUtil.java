@@ -3,14 +3,13 @@ package com.ccp.utility;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.stereotype.Component;
-
-import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import javax.crypto.SecretKey;
+import org.springframework.stereotype.Component;
 
 @Component
 public class JWTUtil {
@@ -23,7 +22,7 @@ public class JWTUtil {
         return Keys.hmacShaKeyFor(decodedKey);
     }
 
-    //Generate Token
+    // Generate Token
     public String generateToken(String customerId) {
         return Jwts.builder()
                 .subject(customerId)
@@ -34,7 +33,7 @@ public class JWTUtil {
                 .compact();
     }
 
-    //Read Token
+    // Read Token
     public Claims getClaims(String token) {
         return Jwts.parser()
                 .verifyWith(signingKey())
@@ -48,12 +47,12 @@ public class JWTUtil {
         return getClaims(token).getSubject();
     }
 
-    //Get Exp date
+    // Get Exp date
     public Date getExpDate(String token) {
         return getClaims(token).getExpiration();
     }
 
-    //Validate token Exp date
+    // Validate token Exp date
     public boolean isTokenExpired(String token) {
         return getExpDate(token).before(new Date(System.currentTimeMillis()));
     }

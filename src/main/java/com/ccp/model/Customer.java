@@ -5,11 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
-
 import java.util.List;
 import java.util.Objects;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 @Getter
 @Setter
@@ -20,7 +19,9 @@ import java.util.Objects;
 public class Customer {
 
     @Id
-    @Pattern(regexp = "^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$", message = "Please enter a valid customerId.")
+    @Pattern(
+            regexp = "^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$",
+            message = "Please enter a valid customerId.")
     @Column(name = "customer_id")
     private String customerId;
 
@@ -60,14 +61,23 @@ public class Customer {
         if (this == o) return true;
         if (o == null) return false;
         if (!(o instanceof Customer customer)) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy hibernateProxy ? hibernateProxy.getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy hibernateProxy ? hibernateProxy.getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        Class<?> oEffectiveClass = o instanceof HibernateProxy hibernateProxy
+                ? hibernateProxy.getHibernateLazyInitializer().getPersistentClass()
+                : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy hibernateProxy
+                ? hibernateProxy.getHibernateLazyInitializer().getPersistentClass()
+                : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
         return getCustomerId() != null && Objects.equals(getCustomerId(), customer.getCustomerId());
     }
 
     @Override
     public final int hashCode() {
-        return this instanceof HibernateProxy hibernateProxy ? hibernateProxy.getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+        return this instanceof HibernateProxy hibernateProxy
+                ? hibernateProxy
+                        .getHibernateLazyInitializer()
+                        .getPersistentClass()
+                        .hashCode()
+                : getClass().hashCode();
     }
 }

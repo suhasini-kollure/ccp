@@ -24,5 +24,4 @@ public class UpdateCustomer {
 
     @Size(min = 4, message = "Password length must be at least 4 chars")
     private String password;
-
 }

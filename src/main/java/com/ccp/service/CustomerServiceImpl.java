@@ -4,6 +4,9 @@ import com.ccp.dto.UpdateCustomer;
 import com.ccp.model.Customer;
 import com.ccp.repository.CustomerRepository;
 import jakarta.ws.rs.NotFoundException;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,10 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 @Slf4j
@@ -35,15 +34,18 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer saveCustomer(Customer customer) {
         if (customerRepository.existsById(customer.getCustomerId())) {
             log.error("Customer already exists with customerId : {}", customer.getCustomerId());
-            throw new DataIntegrityViolationException(String.format("Customer already exists with customerId : %s", customer.getCustomerId()));
+            throw new DataIntegrityViolationException(
+                    String.format("Customer already exists with customerId : %s", customer.getCustomerId()));
         }
         if (customerRepository.existsByEmail(customer.getEmail())) {
             log.error("Customer already exists with email : {}", customer.getEmail());
-            throw new DataIntegrityViolationException(String.format("Customer already exists with email : %s", customer.getEmail()));
+            throw new DataIntegrityViolationException(
+                    String.format("Customer already exists with email : %s", customer.getEmail()));
         }
         if (customerRepository.existsByPhoneNo(customer.getPhoneNo())) {
             log.error("Customer already exists with phone number : {}", customer.getPhoneNo());
-            throw new DataIntegrityViolationException(String.format("Customer already exists with phone number : %s", customer.getPhoneNo()));
+            throw new DataIntegrityViolationException(
+                    String.format("Customer already exists with phone number : %s", customer.getPhoneNo()));
         }
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         Customer savedCustomer = customerRepository.save(customer);
@@ -135,6 +137,6 @@ public class CustomerServiceImpl implements CustomerService {
         return new User(
                 customerId,
                 customer.getPassword(),
-                roles.stream().map(SimpleGrantedAuthority::new).toList()
-        );    }
+                roles.stream().map(SimpleGrantedAuthority::new).toList());
+    }
 }

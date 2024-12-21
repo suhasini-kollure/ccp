@@ -8,7 +8,9 @@ import lombok.Data;
 @Data
 public class LoginRequest {
 
-    @Pattern(regexp = "^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$", message = "Please enter a valid customerId.")
+    @Pattern(
+            regexp = "^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$",
+            message = "Please enter a valid customerId.")
     private String customerId;
 
     @NotEmpty(message = "Password can't be null.")

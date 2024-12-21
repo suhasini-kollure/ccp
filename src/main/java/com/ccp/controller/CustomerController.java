@@ -9,14 +9,13 @@ import com.ccp.utility.JWTUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.security.Principal;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 @RestController
 @RequestMapping("customer")
@@ -27,7 +26,8 @@ public class CustomerController {
     private final JWTUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    public CustomerController(CustomerService customerService, JWTUtil jwtUtil, AuthenticationManager authenticationManager) {
+    public CustomerController(
+            CustomerService customerService, JWTUtil jwtUtil, AuthenticationManager authenticationManager) {
         this.customerService = customerService;
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
@@ -56,7 +56,9 @@ public class CustomerController {
         }
     }
 
-    @Operation(summary = "Get Customer by CustomerId", description = "Endpoint to get a existing customer by customerID")
+    @Operation(
+            summary = "Get Customer by CustomerId",
+            description = "Endpoint to get a existing customer by customerID")
     @GetMapping("/getById/{customerId}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("customerId") String customerId) {
         Customer customerById = customerService.getCustomerById(customerId);
@@ -79,7 +81,8 @@ public class CustomerController {
 
     @Operation(summary = "Update Customer", description = "Endpoint to update a existing customer by customer id")
     @PatchMapping("/update/{customerId}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable("customerId") String customerId, @Valid @RequestBody UpdateCustomer updateCustomer) {
+    public ResponseEntity<Customer> updateCustomer(
+            @PathVariable("customerId") String customerId, @Valid @RequestBody UpdateCustomer updateCustomer) {
         Customer customer = customerService.updateCustomer(customerId, updateCustomer);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }

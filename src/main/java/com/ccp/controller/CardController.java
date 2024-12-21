@@ -37,7 +37,8 @@ public class CardController {
 
     @Operation(summary = "Update Card", description = "Endpoint to update a card")
     @PatchMapping("/update/{cardNumber}")
-    public ResponseEntity<Card> updateCard(@PathVariable("cardNumber") String cardNumber, @Valid @RequestBody UpdateCard updateCard) {
+    public ResponseEntity<Card> updateCard(
+            @PathVariable("cardNumber") String cardNumber, @Valid @RequestBody UpdateCard updateCard) {
         Card card = cardService.updateCard(cardNumber, updateCard);
         return new ResponseEntity<>(card, HttpStatus.OK);
     }
@@ -48,5 +49,4 @@ public class CardController {
         String deletedCard = cardService.deleteCard(cardNumber);
         return new ResponseEntity<>(deletedCard, HttpStatus.OK);
     }
-
 }
