@@ -79,7 +79,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public List<Payment> getAllTransactionOfCard(String cardNumber) {
+    public List<Payment> getAllTransactionsOfCard(String cardNumber) {
         List<Optional<Payment>> optionalPayments = paymentRepository.findByCardCardNumber(cardNumber);
         if (optionalPayments.isEmpty()) {
             log.error("Transactions not found with cardNumber : {}", cardNumber);

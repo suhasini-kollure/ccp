@@ -61,8 +61,8 @@ public class PaymentController {
     @Operation(summary = "Get All Transactions of Card", description = "Endpoint to get all the transaction of card")
     @GetMapping("/getAllTransactionsOfCard/{cardNumber}")
     public ResponseEntity<List<Payment>> getAllTransactionOfCard(@PathVariable("cardNumber") String cardNumber) {
-        List<Payment> allTransactionOfCard = paymentService.getAllTransactionOfCard(cardNumber);
-        return new ResponseEntity<>(allTransactionOfCard, HttpStatus.OK);
+        List<Payment> allTransactionsOfCard = paymentService.getAllTransactionsOfCard(cardNumber);
+        return new ResponseEntity<>(allTransactionsOfCard, HttpStatus.OK);
     }
 
     @Operation(
@@ -70,7 +70,7 @@ public class PaymentController {
             description = "Endpoint to get all the transaction of Customer")
     @GetMapping("/getAllTransactionsOfCustomer/{customerId}")
     public ResponseEntity<List<Payment>> getAllTransactionsOfCustomer(@PathVariable("customerId") String customerId) {
-        List<Payment> allTransactionOfCard = paymentService.getAllTransactionsOfCustomer(customerId);
-        return new ResponseEntity<>(allTransactionOfCard, HttpStatus.OK);
+        List<Payment> allTransactionsOfCustomer = paymentService.getAllTransactionsOfCustomer(customerId);
+        return new ResponseEntity<>(allTransactionsOfCustomer, HttpStatus.OK);
     }
 }

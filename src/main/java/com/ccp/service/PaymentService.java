@@ -11,7 +11,7 @@ public interface PaymentService {
 
     Payment getTransaction(String transactionId);
 
-    List<Payment> getAllTransactionOfCard(String cardNumber);
+    List<Payment> getAllTransactionsOfCard(String cardNumber);
 
     List<Payment> getAllTransactionsOfCustomer(String customerId);
 }
