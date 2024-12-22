@@ -1,5 +1,6 @@
 package com.ccp.controller;
 
+import com.ccp.dto.DateFilter;
 import com.ccp.model.Card;
 import com.ccp.model.Customer;
 import com.ccp.model.Payment;
@@ -58,7 +59,7 @@ public class PaymentController {
         return new ResponseEntity<>(transaction, HttpStatus.OK);
     }
 
-    @Operation(summary = "Get All Transactions of Card", description = "Endpoint to get all the transaction of card")
+    @Operation(summary = "Get All Transactions of Card", description = "Endpoint to get all the transactions of card")
     @GetMapping("/getAllTransactionsOfCard/{cardNumber}")
     public ResponseEntity<List<Payment>> getAllTransactionOfCard(@PathVariable("cardNumber") String cardNumber) {
         List<Payment> allTransactionsOfCard = paymentService.getAllTransactionsOfCard(cardNumber);
@@ -67,10 +68,32 @@ public class PaymentController {
 
     @Operation(
             summary = "Get All Transactions of Customer",
-            description = "Endpoint to get all the transaction of Customer")
+            description = "Endpoint to get all the transactions of Customer")
     @GetMapping("/getAllTransactionsOfCustomer/{customerId}")
     public ResponseEntity<List<Payment>> getAllTransactionsOfCustomer(@PathVariable("customerId") String customerId) {
         List<Payment> allTransactionsOfCustomer = paymentService.getAllTransactionsOfCustomer(customerId);
         return new ResponseEntity<>(allTransactionsOfCustomer, HttpStatus.OK);
+    }
+
+    @Operation(
+            summary = "Get All Specific Transactions of Card",
+            description = "Endpoint to get all the specific transactions of card")
+    @GetMapping("/getAllSpecificTransactionsOfCard/{cardNumber}")
+    public ResponseEntity<List<Payment>> getAllSpecificTransactionsOfCard(
+            @PathVariable("cardNumber") String cardNumber, @Valid @RequestBody DateFilter dateFilter) {
+        List<Payment> allSpecificTransactionsOfCard =
+                paymentService.getAllSpecificTransactionsOfCard(cardNumber, dateFilter);
+        return new ResponseEntity<>(allSpecificTransactionsOfCard, HttpStatus.OK);
+    }
+
+    @Operation(
+            summary = "Get All Specific Transactions of Customer",
+            description = "Endpoint to get all the specific transaction of Customer")
+    @GetMapping("/getAllSpecificTransactionsOfCustomer/{customerId}")
+    public ResponseEntity<List<Payment>> getAllSpecificTransactionsOfCustomer(
+            @PathVariable("customerId") String customerId, @Valid @RequestBody DateFilter dateFilter) {
+        List<Payment> allSpecificTransactionsOfCustomer =
+                paymentService.getAllSpecificTransactionsOfCustomer(customerId, dateFilter);
+        return new ResponseEntity<>(allSpecificTransactionsOfCustomer, HttpStatus.OK);
     }
 }

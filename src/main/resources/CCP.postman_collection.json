@@ -1,0 +1,616 @@
+{
+	"info": {
+		"_postman_id": "e4e3cf02-efc2-44cb-9eaf-111192275735",
+		"name": "CCP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37835117"
+	},
+	"item": [
+		{
+			"name": "saveCustomer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerId\" : \"Suhasini_19\",\r\n    \"name\" : \"Suhasini\",\r\n    \"age\" : \"25\",\r\n    \"email\" : \"suhasinikollure@gmail.com\",\r\n    \"phoneNo\" : \"0000000000\",\r\n    \"address\" : \"Bidar\",\r\n    \"password\" : \"1999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customer/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveCard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDgwNjg3NywiZXhwIjoxNzM0ODA3NDc3fQ.jZU-CMNdjqzRBECFMl49_CBpHJjFEkKfc38_1IxtdAALCNqHoVtYiJqLIxIGsnQx",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cardNumber\": \"3230567812305650\",\r\n    \"cardType\": \"Visa\",\r\n    \"expirationDate\": \"19-12-2029\",\r\n    \"cvv\": \"564\",\r\n    \"nameOnCard\": \"Suhasini\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/save/Suhasini_19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"save",
+						"Suhasini_19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomer (customerId)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDc5Mzg0OSwiZXhwIjoxNzM0Nzk0NDQ5fQ.Owf9HHIBjWLcHRDupINeNaunjTZpk8T-KJ1dG8Z854xpsZQDNlmW6yx5fc8yQtiL",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/getById/Suhasini_19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"getById",
+						"Suhasini_19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCard (cardNumber)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDgwMDU1MywiZXhwIjoxNzM0ODAxMTUzfQ.dX8DajvGn08oiI1q5VL0IMkummdVAxLV6OI-H1cmRu-Zew2EuvV1MMAqASGQ29pV",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/card/get/3230567812305689",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"get",
+						"3230567812305689"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllTransactionsOfCard (cardNumber)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDgwNjg3NywiZXhwIjoxNzM0ODA3NDc3fQ.jZU-CMNdjqzRBECFMl49_CBpHJjFEkKfc38_1IxtdAALCNqHoVtYiJqLIxIGsnQx",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/payment/getAllTransactionsOfCard/3230567812305689",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payment",
+						"getAllTransactionsOfCard",
+						"3230567812305689"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSpecificTransactionsOfCard (cardNumber)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDg4NjIyNSwiZXhwIjoxNzM0ODg2ODI1fQ.vQmkm2luRWezfNkW6FmKF9VH4PWI0mEC6b3FJNbzQ1hj_VtgB-qO_5uj2Y9OO32c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fromDateTime\": \"18-12-2025 10:46\",\r\n    \"toDateTime\": \"20-12-2025 10:47\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/payment/getAllSpecificTransactionsOfCard/3230567812305650",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payment",
+						"getAllSpecificTransactionsOfCard",
+						"3230567812305650"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSpecificTransactionsOfCustomer (customerId)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDg4NTYxMywiZXhwIjoxNzM0ODg2MjEzfQ.VviF5_cVdJbtrdn0wquLOuy7BbNqxovy8QCuRAJhYX3wzzfhiZ5HC-hrG1_rgu6_",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fromDateTime\": \"18-12-2025 10:46\",\r\n    \"toDateTime\": \"20-12-2025 10:47\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/payment/getAllSpecificTransactionsOfCustomer/Suhasini_19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payment",
+						"getAllSpecificTransactionsOfCustomer",
+						"Suhasini_19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllTransactionsOfCustomer (customerId)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDgwNjg3NywiZXhwIjoxNzM0ODA3NDc3fQ.jZU-CMNdjqzRBECFMl49_CBpHJjFEkKfc38_1IxtdAALCNqHoVtYiJqLIxIGsnQx",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/payment/getAllTransactionsOfCustomer/Suhasini_19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payment",
+						"getAllTransactionsOfCustomer",
+						"Suhasini_19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTransaction (transactionId)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDgwMDg5MCwiZXhwIjoxNzM0ODAxNDkwfQ.tJ4bu6E-FNruRodlDzWX03_G3MoxDRjUVCTXP3GYU7ZRX4hPO4Zfhm9h5VenA3Rb",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/payment/getTransaction/71bb06c3-16d0-4345-b7cb-504c6fe491e9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payment",
+						"getTransaction",
+						"71bb06c3-16d0-4345-b7cb-504c6fe491e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCard (cardNumber)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDc2MTEwMCwiZXhwIjoxNzM0NzYxNzAwfQ.MidsBzi9PwVWMoy5R64TXoueZz8FYKZUB0aFj_z0swS9i_E3KegfGt8DGwsfxIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cardType\": \"Master Card\",\r\n    \"expirationDate\": \"18-12-2026\",\r\n    \"nameOnCard\": \"Suhasini Kollure\",\r\n    \"cvv\": \"345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/update/3230567812305689",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"update",
+						"3230567812305689"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCustomer (customerId)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/delete/Prithviraj_2000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"delete",
+						"Prithviraj_2000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCard (cardNumber)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDc2NTkyMSwiZXhwIjoxNzM0NzY2NTIxfQ.5d53KRtraQlfwRAYBNN19-DRMW9R7924loPmmOZLE67eL_-pjdRG5LMWnCCr3JM7",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/card/delete/3230567812305689",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						"delete",
+						"3230567812305689"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomer (email)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDc2MTEwMCwiZXhwIjoxNzM0NzYxNzAwfQ.MidsBzi9PwVWMoy5R64TXoueZz8FYKZUB0aFj_z0swS9i_E3KegfGt8DGwsfxIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/getByEmail/suhasinikollure@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"getByEmail",
+						"suhasinikollure@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomer (phoneNo)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDc2MTEwMCwiZXhwIjoxNzM0NzYxNzAwfQ.MidsBzi9PwVWMoy5R64TXoueZz8FYKZUB0aFj_z0swS9i_E3KegfGt8DGwsfxIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/getByPhoneNo/0000000000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"getByPhoneNo",
+						"0000000000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCustomer (customerId)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDc2MTEwMCwiZXhwIjoxNzM0NzYxNzAwfQ.MidsBzi9PwVWMoy5R64TXoueZz8FYKZUB0aFj_z0swS9i_E3KegfGt8DGwsfxIrp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Suhaini Kollure\",\r\n    \"age\": \"25\",\r\n    \"email\": \"suhasinikollure@gmail.com\",\r\n    \"phoneNo\": \"0000000000\",\r\n    \"address\": \"Bidar\",\r\n    \"password\": \"2000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customer/update/Suhasini_19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"update",
+						"Suhasini_19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "processPayment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDg4NjgzNywiZXhwIjoxNzM0ODg3NDM3fQ.IqKKecVp-ZOjyk6o0X-QXf2IpIS67K-IeURsJGHQFCzCxesUJb5YkR_iS1Xq6_fJ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentAmount\" : \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/payment/process/3230567812305650",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payment",
+						"process",
+						"3230567812305650"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"customerId\" : \"Suhasini_19\",\r\n     \"password\" : \"1999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customer/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJTdWhhc2luaV8xOSIsImlzcyI6IkNhcmRzIGFuZCBQYXltZW50IFN5c3RlbSIsImlhdCI6MTczNDg4NzA4MiwiZXhwIjoxNzM0ODg3NjgyfQ.yeJVj3tdf6NJLPx163EHxlFqzZfnpMHHFaBKz2WivWn4FdeFUIj1zS9hrdBFXBcd",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/customer/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

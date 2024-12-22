@@ -128,7 +128,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerByCardNumber(String cardNumber) {
-        return customerRepository.findByCards_CardNumber(cardNumber);
+        return customerRepository.findByCardsCardNumber(cardNumber);
     }
 
     @Override

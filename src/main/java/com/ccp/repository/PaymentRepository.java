@@ -2,6 +2,7 @@ package com.ccp.repository;
 
 import com.ccp.model.Card;
 import com.ccp.model.Payment;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,10 @@ public interface PaymentRepository extends JpaRepository<Payment, String> {
     List<Optional<Payment>> findByCardCardNumber(String cardNumber);
 
     List<Optional<Payment>> findByCustomerCustomerId(String customerId);
+
+    List<Optional<Payment>> findByCardCardNumberAndTimestampBetween(
+            String cardNumber, LocalDateTime fromDateTime, LocalDateTime toDateTime);
+
+    List<Optional<Payment>> findByCustomerCustomerIdAndTimestampBetween(
+            String customerId, LocalDateTime fromDateTime, LocalDateTime toDateTime);
 }

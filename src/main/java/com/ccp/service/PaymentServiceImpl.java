@@ -1,5 +1,6 @@
 package com.ccp.service;
 
+import com.ccp.dto.DateFilter;
 import com.ccp.model.Card;
 import com.ccp.model.Payment;
 import com.ccp.repository.PaymentRepository;
@@ -106,6 +107,60 @@ public class PaymentServiceImpl implements PaymentService {
                     .map(Optional::get)
                     .toList();
             log.info("Transactions found for customerId : {}", customerId);
+            return payments;
+        }
+    }
+
+    @Override
+    public List<Payment> getAllSpecificTransactionsOfCard(String cardNumber, DateFilter dateFilter) {
+        List<Optional<Payment>> optionalPayments = paymentRepository.findByCardCardNumberAndTimestampBetween(
+                cardNumber, dateFilter.getFromDateTime(), dateFilter.getToDateTime());
+        if (optionalPayments.isEmpty()) {
+            log.error(
+                    "Transactions not found with cardNumber {}, from {} to {}",
+                    cardNumber,
+                    dateFilter.getFromDateTime(),
+                    dateFilter.getToDateTime());
+            throw new NotFoundException(String.format(
+                    "Transactions not found with cardNumber %s, from %s to %s",
+                    cardNumber, dateFilter.getFromDateTime(), dateFilter.getToDateTime()));
+        } else {
+            List<Payment> payments = optionalPayments.stream()
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .toList();
+            log.info(
+                    "Transactions found for cardNumber {}, from {} to {}",
+                    cardNumber,
+                    dateFilter.getFromDateTime(),
+                    dateFilter.getToDateTime());
+            return payments;
+        }
+    }
+
+    @Override
+    public List<Payment> getAllSpecificTransactionsOfCustomer(String customerId, DateFilter dateFilter) {
+        List<Optional<Payment>> optionalPayments = paymentRepository.findByCustomerCustomerIdAndTimestampBetween(
+                customerId, dateFilter.getFromDateTime(), dateFilter.getToDateTime());
+        if (optionalPayments.isEmpty()) {
+            log.error(
+                    "Transactions not found with customerId {}, from {} to {}",
+                    customerId,
+                    dateFilter.getFromDateTime(),
+                    dateFilter.getToDateTime());
+            throw new NotFoundException(String.format(
+                    "Transactions not found with customerId %s, from %s to %s",
+                    customerId, dateFilter.getFromDateTime(), dateFilter.getToDateTime()));
+        } else {
+            List<Payment> payments = optionalPayments.stream()
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .toList();
+            log.info(
+                    "Transactions found for customerId {}, from {} to {}",
+                    customerId,
+                    dateFilter.getFromDateTime(),
+                    dateFilter.getToDateTime());
             return payments;
         }
     }
