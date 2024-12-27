@@ -28,7 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Transactional
     public Payment processPayment(Payment payment) {
         try {
-            if (!payment.getCard().getExpirationDate().isBefore(LocalDate.now())) { // Check exp date of the card
+            if (payment.getCard().getExpirationDate().isAfter(LocalDate.now())) { // Check exp date of the card
                 if ("Open".equals(payment.getStatus())) {
                     log.info("Checking for existing Open transaction.");
                     Optional<Payment> existingOpenPayment =
