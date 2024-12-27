@@ -1,7 +1,6 @@
 package com.ccp.service;
 
 import com.ccp.dto.DateFilter;
-import com.ccp.model.Card;
 import com.ccp.model.Payment;
 import com.ccp.repository.PaymentRepository;
 import jakarta.ws.rs.NotFoundException;
@@ -19,19 +18,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
-    private final CardService cardService;
 
     @Autowired
-    public PaymentServiceImpl(PaymentRepository paymentRepository, CardService cardService) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
-        this.cardService = cardService;
     }
 
     @Override
     @Transactional
     public Payment processPayment(Payment payment) {
         try {
-            if (!isCardExpired(payment.getCard().getCardNumber())) {
+            if (!payment.getCard().getExpirationDate().isBefore(LocalDate.now())) { // Check exp date of the card
                 if ("Open".equals(payment.getStatus())) {
                     log.info("Checking for existing Open transaction.");
                     Optional<Payment> existingOpenPayment =
@@ -59,12 +56,6 @@ public class PaymentServiceImpl implements PaymentService {
             log.error("Something went wrong.");
             throw new IllegalArgumentException(e.getMessage());
         }
-    }
-
-    @Override
-    public boolean isCardExpired(String cardNumber) {
-        Card card = cardService.getCard(cardNumber);
-        return card.getExpirationDate().isBefore(LocalDate.now());
     }
 
     @Override

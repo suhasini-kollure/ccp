@@ -8,8 +8,6 @@ public interface PaymentService {
 
     Payment processPayment(Payment payment);
 
-    boolean isCardExpired(String cardNumber);
-
     Payment getTransaction(String transactionId);
 
     List<Payment> getAllTransactionsOfCard(String cardNumber);

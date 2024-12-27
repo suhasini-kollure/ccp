@@ -127,11 +127,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerByCardNumber(String cardNumber) {
-        return customerRepository.findByCardsCardNumber(cardNumber);
-    }
-
-    @Override
     public UserDetails loadUserByUsername(String customerId) throws UsernameNotFoundException {
         Customer customer = getCustomerById(customerId);
 

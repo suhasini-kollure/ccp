@@ -2,10 +2,8 @@ package com.ccp.controller;
 
 import com.ccp.dto.DateFilter;
 import com.ccp.model.Card;
-import com.ccp.model.Customer;
 import com.ccp.model.Payment;
 import com.ccp.service.CardService;
-import com.ccp.service.CustomerService;
 import com.ccp.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,13 +23,11 @@ public class PaymentController {
 
     private final PaymentService paymentService;
     private final CardService cardService;
-    private final CustomerService customerService;
 
     @Autowired
-    public PaymentController(PaymentService paymentService, CardService cardService, CustomerService customerService) {
+    public PaymentController(PaymentService paymentService, CardService cardService) {
         this.paymentService = paymentService;
         this.cardService = cardService;
-        this.customerService = customerService;
     }
 
     @Operation(summary = "Process Payment", description = "Endpoint to process a payment by cardNumber")
@@ -41,9 +37,7 @@ public class PaymentController {
 
         Card card = cardService.getCard(cardNumber);
         payment.setCard(card);
-
-        Customer customer = customerService.getCustomerByCardNumber(cardNumber);
-        payment.setCustomer(customer);
+        payment.setCustomer(card.getCustomer());
 
         log.info("Opening a new transaction.");
         payment.setStatus("Open");
