@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +21,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     private final JWTUtil jwtUtil;
     private final CustomerService customerService;
 
+    @Autowired
     public SecurityFilter(JWTUtil jwtUtil, CustomerService customerService) {
         this.jwtUtil = jwtUtil;
         this.customerService = customerService;
