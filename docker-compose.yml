@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: ccp-api
+    ports:
+      - "9090:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ccp
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SECRET_KEY: C6D9584AA8A36B20318827A85AC3872C933CE8BBFB24DBDA9155962ABF95DA6B
+    restart: always
+
+  db:
+    image: mysql:8.0
+    container_name: ccp-mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ccp
+    restart: always
